@@ -1,0 +1,158 @@
+.coral-page {
+  max-width: 640px;
+}
+
+.coral-page--empty {
+  text-align: center;
+  padding: 3rem 1rem;
+  color: #94a3b8;
+}
+
+.coral-page--empty a {
+  color: #38bdf8;
+}
+
+.coral-breadcrumb {
+  font-size: 0.875rem;
+  margin-bottom: 1.5rem;
+  color: #64748b;
+}
+
+.coral-breadcrumb a {
+  color: #94a3b8;
+  text-decoration: none;
+}
+
+.coral-breadcrumb a:hover {
+  color: #cbd5e1;
+}
+
+.coral-header {
+  margin-bottom: 1.5rem;
+}
+
+.coral-title {
+  margin: 0 0 0.35rem;
+  font-size: clamp(1.75rem, 4vw, 2.25rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: #f0f9ff;
+}
+
+.coral-scientific {
+  margin: 0;
+  font-style: italic;
+  font-size: 1.0625rem;
+  color: #7dd3fc;
+}
+
+.coral-share {
+  padding: 1rem 1.25rem;
+  margin-bottom: 1.5rem;
+  border-radius: 10px;
+  background: rgba(15, 40, 55, 0.55);
+  border: 1px solid rgba(56, 189, 248, 0.12);
+}
+
+.coral-share-label {
+  display: block;
+  font-size: 0.6875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #64748b;
+  margin-bottom: 0.5rem;
+}
+
+.coral-share-url {
+  display: block;
+  font-size: 0.8125rem;
+  word-break: break-all;
+  color: #bae6fd;
+  background: rgba(6, 24, 38, 0.6);
+  padding: 0.5rem 0.75rem;
+  border-radius: 6px;
+  border: 1px solid rgba(56, 189, 248, 0.15);
+}
+
+.coral-share-hint {
+  margin: 0.75rem 0 0;
+  font-size: 0.8125rem;
+  color: #64748b;
+}
+
+.coral-facts {
+  display: grid;
+  gap: 1rem;
+  margin: 0 0 1.5rem;
+}
+
+.coral-facts > div {
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(56, 189, 248, 0.1);
+}
+
+.coral-facts > div:last-of-type {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.coral-facts dt {
+  margin: 0 0 0.35rem;
+  font-size: 0.6875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #64748b;
+}
+
+.coral-facts dd {
+  margin: 0;
+  font-size: 1rem;
+  color: #e2e8f0;
+}
+
+.coral-tags {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.coral-tags li {
+  font-size: 0.8125rem;
+  padding: 0.25rem 0.6rem;
+  border-radius: 999px;
+  background: rgba(30, 58, 78, 0.9);
+  color: #94a3b8;
+}
+
+.coral-notes {
+  margin-bottom: 2rem;
+}
+
+.coral-notes-title {
+  margin: 0 0 0.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #cbd5e1;
+}
+
+.coral-notes-body {
+  margin: 0;
+  line-height: 1.65;
+  color: #94a3b8;
+  font-size: 0.9375rem;
+}
+
+.coral-back {
+  display: inline-block;
+  color: #38bdf8;
+  text-decoration: none;
+  font-size: 0.9375rem;
+  font-weight: 500;
+}
+
+.coral-back:hover {
+  color: #7dd3fc;
+}

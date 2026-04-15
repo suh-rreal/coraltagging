@@ -1,0 +1,20 @@
+import { Link, Outlet } from 'react-router-dom';
+import './Layout.css';
+
+export default function Layout() {
+  return (
+    <div className="layout">
+      <header className="layout-header">
+        <Link to="/" className="layout-brand">
+          Coral dashboard
+        </Link>
+        <nav className="layout-nav" aria-label="Main">
+          <Link to="/">All corals</Link>
+        </nav>
+      </header>
+      <main className="layout-main">
+        <Outlet />
+      </main>
+    </div>
+  );
+}
