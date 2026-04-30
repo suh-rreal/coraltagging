@@ -16,7 +16,6 @@ export default function CoralPage() {
   }
 
   const pageUrl = typeof window !== 'undefined' ? window.location.href : '';
-  const recordedAt = formatRecordedAt(coral.lastRecorded);
   const observations = getObservationLog(coral);
 
   return (
