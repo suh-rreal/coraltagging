@@ -162,9 +162,10 @@ export default function Dashboard() {
                   >
                     <span className="coral-circle-label">{node.coral.commonName}</span>
                     <span className="coral-bloom-card">
-                      <strong>{node.coral.commonName}</strong>
-                      <small>Last recorded: {formatRecordedAt(node.coral.lastRecorded)}</small>
-                      <small>Health level: {node.coral.healthLevel ?? node.coral.status}</small>
+                      <strong>{node.coral.coralId ?? node.coral.commonName}</strong>
+                      <small className="coral-bloom-subtitle">{node.coral.scientificName}</small>
+                      <small className="coral-bloom-meta">Last recorded: {formatRecordedAt(node.coral.lastRecorded)}</small>
+                      <small className="coral-bloom-meta">Health level: {node.coral.healthLevel ?? node.coral.status}</small>
                     </span>
                   </Link>
                 ) : (

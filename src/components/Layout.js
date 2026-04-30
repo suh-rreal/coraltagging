@@ -6,10 +6,11 @@ export default function Layout() {
     <div className="layout">
       <header className="layout-header">
         <Link to="/" className="layout-brand">
-          Coral dashboard
+          coral tagging
         </Link>
         <nav className="layout-nav" aria-label="Main">
-          <Link to="/">All corals</Link>
+          <Link to="/">coral map</Link>
+          <Link to="/corals">all corals</Link>
         </nav>
       </header>
       <main className="layout-main">

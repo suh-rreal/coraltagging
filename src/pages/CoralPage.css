@@ -1,5 +1,6 @@
 .coral-page {
   max-width: 640px;
+  margin: 0 auto;
 }
 
 .coral-page--empty {
@@ -155,4 +156,68 @@
 
 .coral-back:hover {
   color: #7dd3fc;
+}
+
+.coral-observations {
+  margin-bottom: 2rem;
+}
+
+.coral-observations-title {
+  margin: 0 0 0.75rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #cbd5e1;
+}
+
+.coral-observations-table-wrap {
+  overflow-x: auto;
+  border: 1px solid rgba(56, 189, 248, 0.14);
+  border-radius: 10px;
+}
+
+.coral-observations-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 640px;
+  background: rgba(15, 40, 55, 0.45);
+}
+
+.coral-observations-table th,
+.coral-observations-table td {
+  padding: 0.65rem 0.75rem;
+  border-bottom: 1px solid rgba(56, 189, 248, 0.12);
+  text-align: left;
+  vertical-align: top;
+}
+
+.coral-observations-table thead th {
+  color: #bae6fd;
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+
+.coral-observations-table thead th small {
+  display: block;
+  margin-top: 0.2rem;
+  color: #7dd3fc;
+  font-weight: 500;
+  font-size: 0.74rem;
+}
+
+.coral-observations-table tbody th {
+  color: #94a3b8;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  width: 160px;
+}
+
+.coral-observations-table tbody td {
+  color: #e2e8f0;
+  font-size: 0.9rem;
+}
+
+.coral-observations-table tbody tr:last-child th,
+.coral-observations-table tbody tr:last-child td {
+  border-bottom: none;
 }

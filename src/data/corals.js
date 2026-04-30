@@ -3,6 +3,7 @@
  */
 export const corals = [
   {
+    coralId: 'CRL-001',
     slug: 'staghorn-acropora',
     commonName: 'Staghorn coral',
     scientificName: 'Acropora cervicornis',
@@ -15,6 +16,35 @@ export const corals = [
     coloration: 'Golden tan with pale branch tips',
     bleaching: 'Partial bleaching on upper branches',
     diseaseSigns: 'Mild tissue recession on two branch tips',
+    observations: [
+      {
+        recordedAt: '2026-04-22T09:14:00-07:00',
+        observer: 'Research phone (RP-101)',
+        lifeStatus: 'Alive',
+        colonySizeCm: '68 x 54',
+        coloration: 'Golden tan with pale branch tips',
+        bleaching: 'Partial bleaching on upper branches',
+        diseaseSigns: 'Mild tissue recession on two branch tips',
+      },
+      {
+        recordedAt: '2026-03-18T11:02:00-07:00',
+        observer: 'Citizen phone',
+        lifeStatus: 'Alive',
+        colonySizeCm: '66 x 52',
+        coloration: 'Golden tan with cream branch tips',
+        bleaching: 'Mild paling on sun-exposed branches',
+        diseaseSigns: 'No active lesions',
+      },
+      {
+        recordedAt: '2026-02-07T10:20:00-07:00',
+        observer: 'Research phone (RP-101)',
+        lifeStatus: 'Alive',
+        colonySizeCm: '65 x 50',
+        coloration: 'Warm tan',
+        bleaching: 'None observed',
+        diseaseSigns: 'No disease signs observed',
+      },
+    ],
     images: [
       {
         url: 'https://images.unsplash.com/photo-1583212292454-1fe6229603b7?auto=format&fit=crop&w=1200&q=80',
@@ -31,6 +61,7 @@ export const corals = [
       'Fast-growing branching coral that forms dense thickets. Important for shallow reef structure and fish habitat.',
   },
   {
+    coralId: 'CRL-002',
     slug: 'elkhorn-acropora',
     commonName: 'Elkhorn coral',
     scientificName: 'Acropora palmata',
@@ -43,6 +74,35 @@ export const corals = [
     coloration: 'Olive-brown plates with light cream edges',
     bleaching: 'Localized paling on wave-exposed side',
     diseaseSigns: 'No active disease lesions observed',
+    observations: [
+      {
+        recordedAt: '2026-04-24T13:42:00-07:00',
+        observer: 'Research phone (RP-203)',
+        lifeStatus: 'Alive',
+        colonySizeCm: '92 x 80',
+        coloration: 'Olive-brown plates with light cream edges',
+        bleaching: 'Localized paling on wave-exposed side',
+        diseaseSigns: 'No active disease lesions observed',
+      },
+      {
+        recordedAt: '2026-03-29T09:05:00-07:00',
+        observer: 'Citizen phone',
+        lifeStatus: 'Alive',
+        colonySizeCm: '90 x 78',
+        coloration: 'Olive-brown with pale rims',
+        bleaching: 'No bleaching visible',
+        diseaseSigns: 'Minor old scar tissue only',
+      },
+      {
+        recordedAt: '2026-01-16T08:33:00-07:00',
+        observer: 'Research phone (RP-203)',
+        lifeStatus: 'Alive',
+        colonySizeCm: '88 x 75',
+        coloration: 'Brown-olive',
+        bleaching: 'None observed',
+        diseaseSigns: 'No disease signs observed',
+      },
+    ],
     images: [
       {
         url: 'https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=1200&q=80',
@@ -59,6 +119,7 @@ export const corals = [
       'Broad, flattened branches resemble elk antlers. Often found in high-energy shallow zones.',
   },
   {
+    coralId: 'CRL-003',
     slug: 'brain-coral',
     commonName: 'Grooved brain coral',
     scientificName: 'Diploria labyrinthiformis',
@@ -71,6 +132,35 @@ export const corals = [
     coloration: 'Deep olive-green ridges with brown valleys',
     bleaching: 'No bleaching visible',
     diseaseSigns: 'No disease signs observed',
+    observations: [
+      {
+        recordedAt: '2026-04-27T08:37:00-07:00',
+        observer: 'Research phone (RP-309)',
+        lifeStatus: 'Alive',
+        colonySizeCm: '74 x 71',
+        coloration: 'Deep olive-green ridges with brown valleys',
+        bleaching: 'No bleaching visible',
+        diseaseSigns: 'No disease signs observed',
+      },
+      {
+        recordedAt: '2026-03-21T09:48:00-07:00',
+        observer: 'Citizen phone',
+        lifeStatus: 'Alive',
+        colonySizeCm: '73 x 70',
+        coloration: 'Olive ridges and brown valleys',
+        bleaching: 'No bleaching visible',
+        diseaseSigns: 'No disease signs observed',
+      },
+      {
+        recordedAt: '2026-02-14T15:11:00-07:00',
+        observer: 'Research phone (RP-309)',
+        lifeStatus: 'Alive',
+        colonySizeCm: '72 x 69',
+        coloration: 'Olive-brown',
+        bleaching: 'None observed',
+        diseaseSigns: 'No disease signs observed',
+      },
+    ],
     images: [
       {
         url: 'https://images.unsplash.com/photo-1526336024174-e58f5cdd8e13?auto=format&fit=crop&w=1200&q=80',
@@ -87,6 +177,7 @@ export const corals = [
       'Slow-growing massive coral with maze-like grooves. Forms large boulders on many Caribbean reefs.',
   },
   {
+    coralId: 'CRL-004',
     slug: 'pillar-dendrogyra',
     commonName: 'Pillar coral',
     scientificName: 'Dendrogyra cylindrus',
@@ -99,6 +190,35 @@ export const corals = [
     coloration: 'Muted gray-brown with sparse bright polyps',
     bleaching: 'Moderate bleaching on top-facing columns',
     diseaseSigns: 'Dark spot lesions near column bases',
+    observations: [
+      {
+        recordedAt: '2026-04-29T16:05:00-07:00',
+        observer: 'Research phone (RP-417)',
+        lifeStatus: 'Alive',
+        colonySizeCm: '110 x 46',
+        coloration: 'Muted gray-brown with sparse bright polyps',
+        bleaching: 'Moderate bleaching on top-facing columns',
+        diseaseSigns: 'Dark spot lesions near column bases',
+      },
+      {
+        recordedAt: '2026-03-30T12:26:00-07:00',
+        observer: 'Citizen phone',
+        lifeStatus: 'Alive',
+        colonySizeCm: '108 x 45',
+        coloration: 'Gray-brown with intermittent bright polyps',
+        bleaching: 'Mild patchy bleaching on upper surfaces',
+        diseaseSigns: 'Two small dark spots at one base',
+      },
+      {
+        recordedAt: '2026-02-25T10:58:00-07:00',
+        observer: 'Research phone (RP-417)',
+        lifeStatus: 'Alive',
+        colonySizeCm: '106 x 44',
+        coloration: 'Brown-gray',
+        bleaching: 'No bleaching visible',
+        diseaseSigns: 'No disease signs observed',
+      },
+    ],
     images: [
       {
         url: 'https://images.unsplash.com/photo-1518020382113-a7e8fc38eac9?auto=format&fit=crop&w=1200&q=80',

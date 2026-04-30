@@ -182,7 +182,7 @@
 
 .coral-bloom-card strong {
   display: block;
-  margin-bottom: 0.45rem;
+  margin-bottom: 0.15rem;
   font-size: 0.95rem;
   color: #f8fafc;
 }
@@ -191,6 +191,18 @@
   display: block;
   font-size: 0.8rem;
   line-height: 1.45;
+  color: #bfdbfe;
+}
+
+.coral-bloom-card .coral-bloom-subtitle {
+  font-size: 0.86rem;
+  font-weight: 600;
+  color: #dbeafe;
+  margin-bottom: 0.08rem;
+}
+
+.coral-bloom-card .coral-bloom-meta {
+  font-size: 0.76rem;
   color: #bfdbfe;
 }
 
