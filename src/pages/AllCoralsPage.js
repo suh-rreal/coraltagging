@@ -6,7 +6,7 @@ import './AllCoralsPage.css';
 export default function AllCoralsPage() {
   const [expandedCorals, setExpandedCorals] = useState({});
   const coralRows = corals.map((coral) => {
-    const observations = getObservationLog(coral);
+    const observations = getStoredObservationLog(coral.slug, coral);
     return {
       coral,
       latest: observations[0] ?? null,
@@ -60,7 +60,7 @@ export default function AllCoralsPage() {
                     <td>{coral.scientificName}</td>
                     <td>{formatRecordedAt(latest?.recordedAt ?? coral.lastRecorded)}</td>
                     <td>{latest?.observer ?? 'Citizen phone'}</td>
-                    <td>{latest?.photo ?? 'Not recorded'}</td>
+                    <td>{photoStatus(latest?.photo)}</td>
                     <td>{latest?.health ?? normalizeHealth(coral.lifeStatus)}</td>
                     <td>{latest?.bleaching ?? coral.bleaching ?? 'Not recorded'}</td>
                     <td>{latest?.height ?? parseSizePart(coral.colonySizeCm, 0) ?? 'Not recorded'}</td>
@@ -76,7 +76,7 @@ export default function AllCoralsPage() {
                       <td />
                       <td>{formatRecordedAt(entry.recordedAt)}</td>
                       <td>{entry.observer}</td>
-                      <td>{entry.photo ?? 'Not recorded'}</td>
+                      <td>{photoStatus(entry.photo)}</td>
                       <td>{entry.health ?? 'Unknown'}</td>
                       <td>{entry.bleaching ?? 'Not recorded'}</td>
                       <td>{entry.height ?? 'Not recorded'}</td>
@@ -136,10 +136,34 @@ function getObservationLog(coral) {
       bleaching: normalizeBleaching(entry.bleaching),
       height: entry.height ?? parseSizePart(entry.colonySizeCm, 0) ?? 'Not recorded',
       width: entry.width ?? parseSizePart(entry.colonySizeCm, 1) ?? 'Not recorded',
-      disease: entry.disease ?? entry.diseaseSigns ?? 'Not recorded',
+      disease: normalizeDisease(entry.disease ?? entry.diseaseSigns),
       notes: entry.notes ?? 'Not recorded',
     }))
     .sort((a, b) => new Date(b.recordedAt).getTime() - new Date(a.recordedAt).getTime());
+}
+
+function getStoredObservationLog(slug, coral) {
+  const fallback = getObservationLog(coral);
+  if (typeof window === 'undefined') return fallback;
+  try {
+    const stored = window.localStorage.getItem(storageKey(slug));
+    if (!stored) return fallback;
+    const parsed = JSON.parse(stored);
+    if (!Array.isArray(parsed)) return fallback;
+    return parsed;
+  } catch {
+    return fallback;
+  }
+}
+
+function storageKey(slug) {
+  return `coral-observations-${slug}`;
+}
+
+function photoStatus(photo) {
+  if (!photo) return 'Not recorded';
+  if (String(photo).toLowerCase() === 'not recorded') return 'Not recorded';
+  return 'Recorded';
 }
 
 function normalizeObserver(observer, phoneId) {
@@ -164,6 +188,15 @@ function normalizeBleaching(value) {
   if (lowered.includes('little') || lowered.includes('mild') || lowered.includes('localized') || lowered.includes('partial')) return 'Little';
   if (lowered.includes('none') || lowered.includes('no bleaching') || lowered.includes('no')) return 'None';
   return 'Little';
+}
+
+function normalizeDisease(value) {
+  if (!value) return 'Unsure';
+  const lowered = String(value).toLowerCase();
+  if (lowered.includes('yes') || lowered.includes('disease') || lowered.includes('lesion') || lowered.includes('spot')) return 'Yes';
+  if (lowered.includes('no') || lowered.includes('none')) return 'No';
+  if (lowered.includes('unsure') || lowered.includes('unknown')) return 'Unsure';
+  return 'Unsure';
 }
 
 function parseSizePart(colonySizeCm, partIndex) {
