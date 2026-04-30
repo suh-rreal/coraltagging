@@ -8,6 +8,8 @@ export const corals = [
     scientificName: 'Acropora cervicornis',
     region: 'Caribbean',
     status: 'Critically Endangered',
+    healthLevel: 'High Stress',
+    lastRecorded: '2026-04-22T09:14:00-07:00',
     depthM: '2–20',
     tags: ['branching', 'reef-building'],
     notes:
@@ -19,6 +21,8 @@ export const corals = [
     scientificName: 'Acropora palmata',
     region: 'Caribbean',
     status: 'Critically Endangered',
+    healthLevel: 'Moderate Stress',
+    lastRecorded: '2026-04-24T13:42:00-07:00',
     depthM: '1–5',
     tags: ['branching', 'reef-building'],
     notes:
@@ -30,6 +34,8 @@ export const corals = [
     scientificName: 'Diploria labyrinthiformis',
     region: 'Caribbean',
     status: 'Near Threatened',
+    healthLevel: 'Stable',
+    lastRecorded: '2026-04-27T08:37:00-07:00',
     depthM: '1–30',
     tags: ['massive', 'boulder'],
     notes:
@@ -41,6 +47,8 @@ export const corals = [
     scientificName: 'Dendrogyra cylindrus',
     region: 'Caribbean',
     status: 'Critically Endangered',
+    healthLevel: 'Critical',
+    lastRecorded: '2026-04-29T16:05:00-07:00',
     depthM: '1–20',
     tags: ['columnar', 'distinctive'],
     notes:

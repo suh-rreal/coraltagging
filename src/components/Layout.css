@@ -1,4 +1,5 @@
 .layout {
+  --app-header-height: 72px;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -10,12 +11,16 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1rem 1.5rem;
+  height: var(--app-header-height);
+  box-sizing: border-box;
+  padding: 0 1.5rem;
   border-bottom: 1px solid rgba(94, 189, 214, 0.2);
   background: rgba(6, 24, 38, 0.85);
   backdrop-filter: blur(8px);
-  position: sticky;
+  position: fixed;
   top: 0;
+  left: 0;
+  right: 0;
   z-index: 10;
 }
 
@@ -48,7 +53,7 @@
 
 .layout-main {
   flex: 1;
-  padding: 1.5rem clamp(1rem, 4vw, 2.5rem) 2.5rem;
+  padding: var(--app-header-height) clamp(1rem, 4vw, 2.5rem) 2.5rem;
   max-width: 1200px;
   width: 100%;
   margin: 0 auto;
