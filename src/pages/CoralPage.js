@@ -16,6 +16,7 @@ export default function CoralPage() {
   }
 
   const pageUrl = typeof window !== 'undefined' ? window.location.href : '';
+  const recordedAt = formatRecordedAt(coral.lastRecorded);
 
   return (
     <article className="coral-page">
@@ -50,6 +51,30 @@ export default function CoralPage() {
           <dd>{coral.status}</dd>
         </div>
         <div>
+          <dt>Life status</dt>
+          <dd>{coral.lifeStatus ?? 'Unknown'}</dd>
+        </div>
+        <div>
+          <dt>Colony size (cm)</dt>
+          <dd>{coral.colonySizeCm ?? 'Not recorded'}</dd>
+        </div>
+        <div>
+          <dt>Coloration</dt>
+          <dd>{coral.coloration ?? 'Not recorded'}</dd>
+        </div>
+        <div>
+          <dt>Bleaching</dt>
+          <dd>{coral.bleaching ?? 'Not recorded'}</dd>
+        </div>
+        <div>
+          <dt>Disease signs</dt>
+          <dd>{coral.diseaseSigns ?? 'Not recorded'}</dd>
+        </div>
+        <div>
+          <dt>Last recorded</dt>
+          <dd>{recordedAt}</dd>
+        </div>
+        <div>
           <dt>Tags</dt>
           <dd>
             <ul className="coral-tags">
@@ -61,6 +86,21 @@ export default function CoralPage() {
         </div>
       </dl>
 
+      <section className="coral-images" aria-label="Coral observation images">
+        <h2 className="coral-images-title">Observation images</h2>
+        {Array.isArray(coral.images) && coral.images.length > 0 ? (
+          <div className="coral-image-grid">
+            {coral.images.map((image) => (
+              <figure key={image.url} className="coral-image-card">
+                <img src={image.url} alt={image.alt || `${coral.commonName} observation`} loading="lazy" />
+              </figure>
+            ))}
+          </div>
+        ) : (
+          <p className="coral-images-empty">No images have been uploaded for this coral yet.</p>
+        )}
+      </section>
+
       <section className="coral-notes">
         <h2 className="coral-notes-title">Notes</h2>
         <p className="coral-notes-body">{coral.notes}</p>
@@ -71,4 +111,17 @@ export default function CoralPage() {
       </Link>
     </article>
   );
+}
+
+function formatRecordedAt(value) {
+  if (!value) return 'Not recorded';
+  const parsed = new Date(value);
+  if (Number.isNaN(parsed.getTime())) return value;
+  return new Intl.DateTimeFormat('en-US', {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric',
+    hour: 'numeric',
+    minute: '2-digit',
+  }).format(parsed);
 }

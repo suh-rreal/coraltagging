@@ -10,6 +10,21 @@ export const corals = [
     status: 'Critically Endangered',
     healthLevel: 'High Stress',
     lastRecorded: '2026-04-22T09:14:00-07:00',
+    lifeStatus: 'Alive',
+    colonySizeCm: '68 x 54',
+    coloration: 'Golden tan with pale branch tips',
+    bleaching: 'Partial bleaching on upper branches',
+    diseaseSigns: 'Mild tissue recession on two branch tips',
+    images: [
+      {
+        url: 'https://images.unsplash.com/photo-1583212292454-1fe6229603b7?auto=format&fit=crop&w=1200&q=80',
+        alt: 'Staghorn coral colony in shallow reef water',
+      },
+      {
+        url: 'https://images.unsplash.com/photo-1530053969600-caed2596d242?auto=format&fit=crop&w=1200&q=80',
+        alt: 'Close-up of branching coral texture',
+      },
+    ],
     depthM: '2–20',
     tags: ['branching', 'reef-building'],
     notes:
@@ -23,6 +38,21 @@ export const corals = [
     status: 'Critically Endangered',
     healthLevel: 'Moderate Stress',
     lastRecorded: '2026-04-24T13:42:00-07:00',
+    lifeStatus: 'Alive',
+    colonySizeCm: '92 x 80',
+    coloration: 'Olive-brown plates with light cream edges',
+    bleaching: 'Localized paling on wave-exposed side',
+    diseaseSigns: 'No active disease lesions observed',
+    images: [
+      {
+        url: 'https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=1200&q=80',
+        alt: 'Elkhorn coral formation near the reef crest',
+      },
+      {
+        url: 'https://images.unsplash.com/photo-1546026423-cc4642628d2b?auto=format&fit=crop&w=1200&q=80',
+        alt: 'Broad coral branches viewed from above',
+      },
+    ],
     depthM: '1–5',
     tags: ['branching', 'reef-building'],
     notes:
@@ -36,6 +66,21 @@ export const corals = [
     status: 'Near Threatened',
     healthLevel: 'Stable',
     lastRecorded: '2026-04-27T08:37:00-07:00',
+    lifeStatus: 'Alive',
+    colonySizeCm: '74 x 71',
+    coloration: 'Deep olive-green ridges with brown valleys',
+    bleaching: 'No bleaching visible',
+    diseaseSigns: 'No disease signs observed',
+    images: [
+      {
+        url: 'https://images.unsplash.com/photo-1526336024174-e58f5cdd8e13?auto=format&fit=crop&w=1200&q=80',
+        alt: 'Grooved brain coral colony in clear water',
+      },
+      {
+        url: 'https://images.unsplash.com/photo-1460636182338-1f5b0f81f8f9?auto=format&fit=crop&w=1200&q=80',
+        alt: 'Textured maze pattern on brain coral',
+      },
+    ],
     depthM: '1–30',
     tags: ['massive', 'boulder'],
     notes:
@@ -49,6 +94,21 @@ export const corals = [
     status: 'Critically Endangered',
     healthLevel: 'Critical',
     lastRecorded: '2026-04-29T16:05:00-07:00',
+    lifeStatus: 'Alive',
+    colonySizeCm: '110 x 46',
+    coloration: 'Muted gray-brown with sparse bright polyps',
+    bleaching: 'Moderate bleaching on top-facing columns',
+    diseaseSigns: 'Dark spot lesions near column bases',
+    images: [
+      {
+        url: 'https://images.unsplash.com/photo-1518020382113-a7e8fc38eac9?auto=format&fit=crop&w=1200&q=80',
+        alt: 'Column-like coral structures on reef slope',
+      },
+      {
+        url: 'https://images.unsplash.com/photo-1473116763249-2faaef81ccda?auto=format&fit=crop&w=1200&q=80',
+        alt: 'Underwater view of pillar coral habitat',
+      },
+    ],
     depthM: '1–20',
     tags: ['columnar', 'distinctive'],
     notes:

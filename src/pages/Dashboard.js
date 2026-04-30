@@ -39,6 +39,8 @@ const MAP_CONFIG = {
 export default function Dashboard() {
   const viewportRef = useRef(null);
   const dragRef = useRef({ active: false, x: 0, y: 0 });
+  const focusAnimRef = useRef(null);
+  const [focusedHexId, setFocusedHexId] = useState(null);
   const [camera, setCamera] = useState({ x: 0, y: 0, scale: 1 });
   const hexes = useMemo(() => buildHexes(corals, MAP_CONFIG), []);
 
@@ -62,6 +64,13 @@ export default function Dashboard() {
       document.documentElement.style.overflow = htmlOverflow;
       document.body.style.overflow = bodyOverflow;
     };
+  }, []);
+
+  useEffect(() => () => {
+    if (focusAnimRef.current) {
+      cancelAnimationFrame(focusAnimRef.current);
+      focusAnimRef.current = null;
+    }
   }, []);
 
   useEffect(() => {
@@ -90,15 +99,21 @@ export default function Dashboard() {
         ref={viewportRef}
         className="map-viewport"
         aria-label="Coral honeycomb map"
+        onClick={handleViewportClick}
         onPointerDown={handlePointerDown}
         onPointerMove={handlePointerMove}
         onPointerUp={handlePointerUp}
+        onPointerCancel={handlePointerUp}
         onPointerLeave={handlePointerUp}
       >
-        <div className="honeycomb-grid" style={mapStyle}>
+        <div className={`honeycomb-grid ${focusedHexId ? 'honeycomb-grid--focus-mode' : ''}`} style={mapStyle}>
           {hexes.map((hex) => (
-            <article key={hex.id} className="hex-cell" style={hexCellStyle(hex)}>
-              <div className="hex-shape" aria-hidden="true">
+            <article
+              key={hex.id}
+              className={`hex-cell ${focusedHexId === hex.id ? 'hex-cell--focused' : ''}`}
+              style={hexCellStyle(hex)}
+            >
+              <div className="hex-shape" data-hex-id={hex.id} aria-hidden="true" onClick={(event) => handleHexClick(event, hex)}>
                 <svg className="hex-svg" viewBox="0 0 100 100" preserveAspectRatio="none">
                   <polygon
                     points="25,0 75,0 100,50 75,100 25,100 0,50"
@@ -155,8 +170,9 @@ export default function Dashboard() {
 
   function handlePointerDown(event) {
     if (event.target.closest('.coral-circle')) return;
+    stopFocusAnimation();
+    setFocusedHexId(null);
     dragRef.current = { active: true, x: event.clientX, y: event.clientY };
-    event.currentTarget.setPointerCapture(event.pointerId);
   }
 
   function handlePointerMove(event) {
@@ -165,33 +181,83 @@ export default function Dashboard() {
     const dy = event.clientY - dragRef.current.y;
     dragRef.current.x = event.clientX;
     dragRef.current.y = event.clientY;
-    setCamera((prev) => ({ ...prev, x: prev.x + dx, y: prev.y + dy }));
+    const panSpeed = 0.72;
+    setCamera((prev) => ({ ...prev, x: prev.x + (dx * panSpeed), y: prev.y + (dy * panSpeed) }));
   }
 
-  function handlePointerUp(event) {
-    if (event.currentTarget.hasPointerCapture(event.pointerId)) {
-      event.currentTarget.releasePointerCapture(event.pointerId);
-    }
+  function handlePointerUp() {
     dragRef.current.active = false;
   }
 
+  function handleViewportClick() {}
+
+  function handleHexClick(event, hex) {
+    if (event.target.closest('.coral-circle')) return;
+    event.stopPropagation();
+    focusHex(hex);
+  }
+
+  function focusHex(hex) {
+    const viewport = viewportRef.current;
+    if (!viewport) return;
+    const targetScale = 3.2;
+    const centerX = viewport.clientWidth / 2;
+    const centerY = viewport.clientHeight / 2;
+    const hexCenterX = hex.x + (MAP_CONFIG.hexSize / 2);
+    const hexCenterY = hex.y + (MAP_CONFIG.hexHeight / 2);
+
+    setFocusedHexId(hex.id);
+    const targetCamera = {
+      scale: targetScale,
+      x: centerX - (hexCenterX * targetScale),
+      y: centerY - (hexCenterY * targetScale),
+    };
+    animateCameraTo(targetCamera, 520);
+  }
+
   function zoomAtPoint(clientX, clientY, deltaY) {
+    stopFocusAnimation();
     const viewport = viewportRef.current;
     if (!viewport) return;
     const rect = viewport.getBoundingClientRect();
     const px = clientX - rect.left;
     const py = clientY - rect.top;
+    setFocusedHexId(null);
+    const scaleDelta = deltaY > 0 ? 0.95 : 1.05;
     setCamera((prev) => {
-      const scaleDelta = deltaY > 0 ? 0.9 : 1.1;
       const nextScale = clamp(prev.scale * scaleDelta, 0.5, 2.5);
-      const worldX = (px - prev.x) / prev.scale;
-      const worldY = (py - prev.y) / prev.scale;
-      return {
-        scale: nextScale,
-        x: px - worldX * nextScale,
-        y: py - worldY * nextScale,
-      };
+      return zoomFromViewportPoint(prev, px, py, nextScale);
     });
+  }
+
+  function queueCamera(nextCamera) {
+    setCamera(nextCamera);
+  }
+
+  function animateCameraTo(targetCamera, durationMs) {
+    stopFocusAnimation();
+    const start = performance.now();
+    const initial = camera;
+
+    const tick = (now) => {
+      const elapsed = now - start;
+      const t = clamp(elapsed / durationMs, 0, 1);
+      const eased = 1 - ((1 - t) ** 3);
+      queueCamera(interpolateCamera(initial, targetCamera, eased));
+      if (t < 1) {
+        focusAnimRef.current = requestAnimationFrame(tick);
+        return;
+      }
+      focusAnimRef.current = null;
+    };
+
+    focusAnimRef.current = requestAnimationFrame(tick);
+  }
+
+  function stopFocusAnimation() {
+    if (!focusAnimRef.current) return;
+    cancelAnimationFrame(focusAnimRef.current);
+    focusAnimRef.current = null;
   }
 }
 
@@ -286,4 +352,22 @@ function mapHeight() {
 
 function clamp(value, min, max) {
   return Math.max(min, Math.min(max, value));
+}
+
+function zoomFromViewportPoint(camera, viewportX, viewportY, nextScale) {
+  const worldX = (viewportX - camera.x) / camera.scale;
+  const worldY = (viewportY - camera.y) / camera.scale;
+  return {
+    scale: nextScale,
+    x: viewportX - worldX * nextScale,
+    y: viewportY - worldY * nextScale,
+  };
+}
+
+function interpolateCamera(start, end, t) {
+  return {
+    x: start.x + ((end.x - start.x) * t),
+    y: start.y + ((end.y - start.y) * t),
+    scale: start.scale + ((end.scale - start.scale) * t),
+  };
 }
