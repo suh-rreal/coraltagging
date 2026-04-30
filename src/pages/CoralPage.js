@@ -86,21 +86,6 @@ export default function CoralPage() {
         </div>
       </dl>
 
-      <section className="coral-images" aria-label="Coral observation images">
-        <h2 className="coral-images-title">Observation images</h2>
-        {Array.isArray(coral.images) && coral.images.length > 0 ? (
-          <div className="coral-image-grid">
-            {coral.images.map((image) => (
-              <figure key={image.url} className="coral-image-card">
-                <img src={image.url} alt={image.alt || `${coral.commonName} observation`} loading="lazy" />
-              </figure>
-            ))}
-          </div>
-        ) : (
-          <p className="coral-images-empty">No images have been uploaded for this coral yet.</p>
-        )}
-      </section>
-
       <section className="coral-notes">
         <h2 className="coral-notes-title">Notes</h2>
         <p className="coral-notes-body">{coral.notes}</p>
