@@ -1,4 +1,4 @@
-import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { corals } from '../data/corals';
 import './Dashboard.css';
@@ -73,6 +73,27 @@ export default function Dashboard() {
     }
   }, []);
 
+  const stopFocusAnimation = useCallback(() => {
+    if (!focusAnimRef.current) return;
+    cancelAnimationFrame(focusAnimRef.current);
+    focusAnimRef.current = null;
+  }, []);
+
+  const zoomAtPoint = useCallback((clientX, clientY, deltaY) => {
+    stopFocusAnimation();
+    const viewport = viewportRef.current;
+    if (!viewport) return;
+    const rect = viewport.getBoundingClientRect();
+    const px = clientX - rect.left;
+    const py = clientY - rect.top;
+    setFocusedHexId(null);
+    const scaleDelta = deltaY > 0 ? 0.95 : 1.05;
+    setCamera((prev) => {
+      const nextScale = clamp(prev.scale * scaleDelta, 0.5, 2.5);
+      return zoomFromViewportPoint(prev, px, py, nextScale);
+    });
+  }, [stopFocusAnimation]);
+
   useEffect(() => {
     const viewport = viewportRef.current;
     if (!viewport) return undefined;
@@ -84,7 +105,7 @@ export default function Dashboard() {
 
     viewport.addEventListener('wheel', handleNativeWheel, { passive: false });
     return () => viewport.removeEventListener('wheel', handleNativeWheel);
-  }, []);
+  }, [zoomAtPoint]);
 
   const mapStyle = {
     '--map-width': `${mapWidth()}px`,
@@ -215,21 +236,6 @@ export default function Dashboard() {
     animateCameraTo(targetCamera, 520);
   }
 
-  function zoomAtPoint(clientX, clientY, deltaY) {
-    stopFocusAnimation();
-    const viewport = viewportRef.current;
-    if (!viewport) return;
-    const rect = viewport.getBoundingClientRect();
-    const px = clientX - rect.left;
-    const py = clientY - rect.top;
-    setFocusedHexId(null);
-    const scaleDelta = deltaY > 0 ? 0.95 : 1.05;
-    setCamera((prev) => {
-      const nextScale = clamp(prev.scale * scaleDelta, 0.5, 2.5);
-      return zoomFromViewportPoint(prev, px, py, nextScale);
-    });
-  }
-
   function queueCamera(nextCamera) {
     setCamera(nextCamera);
   }
@@ -254,11 +260,6 @@ export default function Dashboard() {
     focusAnimRef.current = requestAnimationFrame(tick);
   }
 
-  function stopFocusAnimation() {
-    if (!focusAnimRef.current) return;
-    cancelAnimationFrame(focusAnimRef.current);
-    focusAnimRef.current = null;
-  }
 }
 
 function statusClass(status) {
